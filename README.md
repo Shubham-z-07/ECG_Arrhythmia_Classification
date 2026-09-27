@@ -1,7 +1,7 @@
 # ECG_Arrhythmia_Classification
 ECG Arrhythmia Classification Using Signal Processing [Machine learning]
 
-This project is a machine learning ECG heartbeat classification system built around signal processing and engineered waveform features. The goal is to detect whether a heartbeat is normal or arrhythmic and, when abnormal, classify it into one of the five MIT-BIH rhythm categories: N, S, V, F, and Q.
+This project is a machine learning ECG Arrhythmia classification system built around signal processing and engineered waveform features. The goal is to detect whether a heartbeat is normal or arrhythmic and, when abnormal, classify it into one of the five MIT-BIH rhythm categories: N, S, V, F, and Q.
 
 The project uses signal-processing-driven feature extraction combined with ML models, not deep learning. The workflow is designed to be interpretable, robust to class imbalance, and suitable for a serious ECG classification portfolio project.
 
