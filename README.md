@@ -105,9 +105,23 @@ The current ML benchmark shows the best model is Random Forest.
 
 This confirms that the signal-processing + ML approach is the right foundation for the project.
 
+![Comparison of test accuracy, macro F1, weighted F1, and balanced accuracy](reports/figures/report_model_metrics.png)
+
 ## Main finding
 
 Random Forest is the most reliable model in this setup because it captures the nonlinear beat morphology patterns while preserving strong minority-class performance. Macro F1 remains the central evaluation metric because the dataset is highly imbalanced and class 0 is dominant.
+
+| Class | Precision | Recall | F1 | Test beats |
+|---|---:|---:|---:|---:|
+| N — Normal | 0.971 | 0.998 | 0.984 | 18,118 |
+| S — Supraventricular | 0.966 | 0.563 | 0.711 | 556 |
+| V — Ventricular | 0.960 | 0.872 | 0.914 | 1,448 |
+| F — Fusion | 0.856 | 0.623 | 0.721 | 162 |
+| Q — Unknown | 0.997 | 0.929 | 0.962 | 1,608 |
+
+![Test per-class F1 and recall for the four models](reports/figures/report_per_class_performance.png)
+
+![Random Forest normalized test confusion matrix](reports/figures/report_random_forest_normalized_test_confusion.png)
 
 ### Notebook guide
 
