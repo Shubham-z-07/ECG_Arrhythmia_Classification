@@ -1,0 +1,5 @@
+file,rows,columns,feature_columns,missing_values,min_label,max_label,n_classes,class_0,class_1,class_2,class_3,class_4
+mitbih_test.csv,21892,188,187,0,0,4,5,18118.0,556.0,1448.0,162.0,1608.0
+mitbih_train.csv,87554,188,187,0,0,4,5,72471.0,2223.0,5788.0,641.0,6431.0
+ptbdb_abnormal.csv,10506,188,187,0,1,1,1,0.0,10506.0,0.0,0.0,0.0
+ptbdb_normal.csv,4046,188,187,0,0,0,1,4046.0,0.0,0.0,0.0,0.0
