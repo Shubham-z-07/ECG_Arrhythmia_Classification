@@ -1,0 +1,5 @@
+check,value,notes
+train_validation_index_overlap,0,Must be zero.
+train_validation_duplicate_waveforms,0,Exact rounded waveform duplicates across the derived validation split.
+train_test_duplicate_waveforms,0,Exact rounded waveform duplicates across Kaggle train and test files.
+validation_test_duplicate_waveforms,0,Exact rounded waveform duplicates across validation and Kaggle test.

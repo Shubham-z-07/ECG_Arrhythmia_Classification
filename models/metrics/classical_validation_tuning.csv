@@ -1,0 +1,11 @@
+model,split,accuracy,macro_f1,weighted_f1,params
+linear_svm,validation,0.9066301182114099,0.6489100357128306,0.9115468460578172,"{""model__C"": 1.0}"
+linear_svm,validation,0.9070869739021187,0.6466776734012967,0.9116535075887695,"{""model__C"": 0.1}"
+logistic_regression,validation,0.7208040660156473,0.5328223978999251,0.7852995952577243,"{""model__C"": 3.0}"
+logistic_regression,validation,0.718919536291474,0.5317890894584126,0.7837399610268422,"{""model__C"": 1.0}"
+logistic_regression,validation,0.7086973902118668,0.5218995248669975,0.7741076272110321,"{""model__C"": 0.1}"
+random_forest,validation,0.973445262977557,0.8750546048549633,0.971822453104834,"{""max_depth"": null, ""min_samples_leaf"": 1}"
+random_forest,validation,0.9720175889440923,0.8624541252749751,0.970992166594555,"{""max_depth"": 18, ""min_samples_leaf"": 1}"
+random_forest,validation,0.9603677688310205,0.8157478518290218,0.9617381007417082,"{""max_depth"": 12, ""min_samples_leaf"": 1}"
+xgboost,validation,0.9416937924733025,0.7974755299730278,0.9471974334894044,"{""learning_rate"": 0.06, ""max_depth"": 5}"
+xgboost,validation,0.8903546342299127,0.6938629694055344,0.906762740453109,"{""learning_rate"": 0.08, ""max_depth"": 3}"

@@ -1,0 +1,3 @@
+model,split,accuracy,macro_f1,weighted_f1
+shuffled_logistic_regression,validation,0.8277082976414825,0.18114669582877677,0.7496831161390812
+shuffled_random_forest,validation,0.8275369767574667,0.18148114860627065,0.7497541965649112
