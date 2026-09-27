@@ -1,5 +1,5 @@
 # ECG_Arrhythmia_Classification
-ECG Classification Using Signal Processing [Machine learning]
+ECG Arrhythmia Classification Using Signal Processing [Machine learning]
 
 This project is a machine learning ECG heartbeat classification system built around signal processing and engineered waveform features. The goal is to detect whether a heartbeat is normal or arrhythmic and, when abnormal, classify it into one of the five MIT-BIH rhythm categories: N, S, V, F, and Q.
 
@@ -34,6 +34,25 @@ The MIT-BIH files contain 188 columns per row: 187 ECG signal samples and one la
 | 2 | V | 4,630 | 1,158 | 1,448 |
 | 3 | F | 513 | 128 | 162 |
 | 4 | Q | 5,145 | 1,286 | 1,608 |
+
+
+### Beat and data preview
+
+Each CSV row represents one fixed-length heartbeat: 187 waveform samples followed by a class label. The waveform values are scaled to the range `[0, 1]`; the label is one of the five MIT-BIH classes. The table shows the first five samples from the first training example found for each label. It is only a short excerpt; each beat has 187 sample values.
+
+| Label | Class | Sample 0 | Sample 1 | Sample 2 | Sample 3 | Sample 4 |
+|---:|---|---:|---:|---:|---:|---:|
+| 0 | N — Normal | 0.97794 | 0.92647 | 0.68137 | 0.24510 | 0.15441 |
+| 1 | S — Supraventricular | 1.00000 | 0.66667 | 0.10046 | 0.03653 | 0.07306 |
+| 2 | V — Ventricular | 0.00000 | 0.00976 | 0.07439 | 0.16220 | 0.24024 |
+| 3 | F — Fusion | 1.00000 | 0.89975 | 0.64160 | 0.31454 | 0.10150 |
+| 4 | Q — Unknown | 0.71261 | 0.62903 | 0.52786 | 0.41496 | 0.28446 |
+
+![Representative MIT-BIH waveforms for the five classes](reports/figures/mitbih_examples_per_class.png)
+
+![Class counts in the project data](reports/figures/report_class_counts.png)
+
+![Class percentages across the train, validation, and test splits](reports/figures/report_split_class_percentages.png)
 
 ## Method
 
@@ -90,23 +109,18 @@ This confirms that the signal-processing + ML approach is the right foundation f
 
 Random Forest is the most reliable model in this setup because it captures the nonlinear beat morphology patterns while preserving strong minority-class performance. Macro F1 remains the central evaluation metric because the dataset is highly imbalanced and class 0 is dominant.
 
-## Sanity checks
+### Notebook guide
 
-The project verifies data integrity and split quality:
+| Notebook | Contents |
+|---|---|
+| [01 EDA](notebooks/01_eda.ipynb) | Previews the raw files, checks shapes, labels, missing values and duplicate waveforms, explores class balance and waveform ranges, and creates exploratory plots. |
+| [02 Signal and Features](notebooks/02_signal_and_features.ipynb) | Loads the processed splits, previews filtering, builds the engineered feature matrices, and checks the feature outputs. |
+| [03 ML Model Training](notebooks/03_ml_model_training.ipynb) | Trains and compares the classical models, uses validation macro F1 for selection, and reviews test metrics and plots. |
+| [04 Final Evaluation](notebooks/04_final_evaluation.ipynb) | Summarizes the final model-selection rule and the held-out test evaluation. |
 
-- train/validation index overlap: 0
-- train/validation duplicate waveforms: 0
-- train/test duplicate waveforms: 0
-- validation/test duplicate waveforms: 0
+The notebooks are for exploration and review. `run_project.sh` is the reproducible command-line path for running all pipeline stages.
 
-The shuffled-label validation also confirms that the model is learning real heartbeat structure instead of only exploiting class imbalance.
-
-## Reproducing the pipeline
-
-Use Python 3.14.7, the latest stable release, or Python 3.12 or newer. The
-dependency versions in `requirements.txt` are the latest releases available
-when this project was updated and include only packages used by the source code
-or notebooks.
+## Project workflow
 
 Create the virtual environment from the project root:
 
@@ -122,16 +136,24 @@ Place the Kaggle CSV files in the raw directory:
 - data/raw/mitbih_train.csv
 - data/raw/mitbih_test.csv
 
-Then run:
+ Run the complete project
+
+`run_project.sh` is the one-command runner. It switches to the repository root, activates the existing `.venv`, and stops as soon as a pipeline step fails. It does not install packages or download the dataset.
+
+Before running, create the environment, install `requirements.txt`, and place `mitbih_train.csv` and `mitbih_test.csv` in `data/raw/`. Then run:
 
 ```bash
-python -m src.data.validate_data
-python -m src.data.split_data
-python -m src.signal_processing.feature_pipeline
-python -m src.ml_models.train_models
-python -m src.models.sanity_checks
-python -m src.ml_models.final_report
+./run_project.sh
 ```
+
+The runner performs these steps in order:
+
+1. Validate the raw data files and label structure.
+2. Create the stratified training and validation split.
+3. Filter the beats and build the feature matrices.
+4. Train and compare Logistic Regression, Linear SVM, Random Forest, and XGBoost.
+5. Run split and shuffled-label sanity checks.
+6. Write the final metrics, tables, plots, and confusion matrices.
 
 ## Project structure
 
@@ -187,3 +209,5 @@ This project is already a strong ML foundation. The next advanced refinements ar
 - deployment-ready evaluation workflow
 
 The important point is that the project remains ML-first, interpretable, and grounded in signal processing rather than deep learning.
+
+
